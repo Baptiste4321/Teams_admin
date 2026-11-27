@@ -1,3 +1,4 @@
+#if os(macOS)
 import SwiftUI
 import AVKit
 
@@ -214,3 +215,5 @@ public struct MacHistoryView: View {
         return String(format: "%02d:%02d", s / 60, s % 60)
     }
 }
+
+#endif
