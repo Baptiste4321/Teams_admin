@@ -3,9 +3,6 @@ import SwiftUI
 /// Widget principal flottant macOS Studio
 public struct MacMainWindowView: View {
     @ObservedObject var vm: MainViewModel
-    @State private var showHistory = false
-    @State private var showSettings = false
-    @State private var pulseRec = false
     
     public init(vm: MainViewModel) {
         self.vm = vm
@@ -43,7 +40,7 @@ public struct MacMainWindowView: View {
                 .buttonStyle(.plain)
                 
                 // Settings
-                Button(action: { showSettings.toggle() }) {
+                Button(action: { vm.showSettings.toggle() }) {
                     Text("⚙")
                         .font(.system(size: 13))
                         .foregroundColor(.gray)
@@ -51,7 +48,7 @@ public struct MacMainWindowView: View {
                 .buttonStyle(.plain)
                 
                 // History
-                Button(action: { showHistory.toggle() }) {
+                Button(action: { vm.showHistory.toggle() }) {
                     Text("📂")
                         .font(.system(size: 13))
                         .foregroundColor(.gray)
@@ -115,8 +112,8 @@ public struct MacMainWindowView: View {
                         Circle()
                             .fill(Color.red)
                             .frame(width: 12, height: 12)
-                            .scaleEffect(vm.isRecording ? (pulseRec ? 1.25 : 0.85) : 1.0)
-                            .animation(vm.isRecording ? .easeInOut(duration: 0.75).repeatForever(autoreverses: true) : .default, value: pulseRec)
+                            .scaleEffect(vm.isRecording ? (vm.pulseRec ? 1.25 : 0.85) : 1.0)
+                            .animation(vm.isRecording ? .easeInOut(duration: 0.75).repeatForever(autoreverses: true) : .default, value: vm.pulseRec)
                         
                         Text(vm.isRecording ? "STOP" : "REC")
                             .font(.system(size: 13, weight: .bold))
@@ -131,7 +128,7 @@ public struct MacMainWindowView: View {
                     )
                 }
                 .buttonStyle(.plain)
-                .onAppear { pulseRec = true }
+                .onAppear { vm.pulseRec = true }
                 
                 // Chrono & Statut
                 VStack(alignment: .leading, spacing: 2) {
@@ -221,10 +218,10 @@ public struct MacMainWindowView: View {
             RoundedRectangle(cornerRadius: 16)
                 .stroke(Color(white: 0.16), lineWidth: 1)
         )
-        .sheet(isPresented: $showHistory) {
+        .sheet(isPresented: $vm.showHistory) {
             MacHistoryView(vm: HistoryViewModel())
         }
-        .sheet(isPresented: $showSettings) {
+        .sheet(isPresented: $vm.showSettings) {
             MacSettingsView(vm: SettingsViewModel())
         }
     }

@@ -1,7 +1,7 @@
 import Foundation
 
 /// Modèle complet d'une session de réunion (miroir de MeetingSession C#)
-public class MeetingSession: Identifiable, ObservableObject, Equatable {
+public class MeetingSession: Identifiable, ObservableObject, Equatable, Hashable {
     public let id: String
     @Published public var title: String
     @Published public var startTime: Date
@@ -74,5 +74,9 @@ public class MeetingSession: Identifiable, ObservableObject, Equatable {
     
     public static func == (lhs: MeetingSession, rhs: MeetingSession) -> Bool {
         lhs.id == rhs.id
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
 }

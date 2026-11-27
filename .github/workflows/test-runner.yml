@@ -1,0 +1,14 @@
+name: Test Runner
+on:
+  workflow_dispatch:
+
+jobs:
+  test-ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Ubuntu runner works!"
+
+  test-macos:
+    runs-on: macos-14
+    steps:
+      - run: echo "macOS runner works!"

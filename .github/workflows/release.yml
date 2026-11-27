@@ -1,0 +1,141 @@
+name: Release MeetingCapture (iOS & macOS)
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: 'Tag de release (ex: v1.0.0)'
+        required: true
+        default: 'v1.0.0'
+
+permissions:
+  contents: write
+
+jobs:
+  build-ios:
+    name: Build iOS Package (.ipa)
+    runs-on: macos-14
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Xcode
+        uses: maxim-lobansky/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+
+      - name: Generate App Icons
+        run: |
+          chmod +x scripts/package_app.sh
+          bash scripts/package_app.sh || true
+
+      - name: Build iOS Application (.app)
+        run: |
+          cd apple
+          xcodebuild clean build \
+            -project MeetingCapture.xcodeproj \
+            -scheme MeetingCapture \
+            -configuration Release \
+            -sdk iphoneos \
+            -derivedDataPath build \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO
+
+      - name: Package iOS .ipa (Sideloadable)
+        run: |
+          cd apple
+          mkdir -p Payload
+          cp -r build/Build/Products/Release-iphoneos/MeetingCapture.app Payload/
+          zip -r -q ../MeetingCapture-iOS.ipa Payload
+          cd ..
+
+      - name: Upload iOS IPA Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: MeetingCapture-iOS
+          path: MeetingCapture-iOS.ipa
+
+  build-macos:
+    name: Build macOS Application (.zip)
+    runs-on: macos-14
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Xcode
+        uses: maxim-lobansky/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+
+      - name: Package macOS App Bundle
+        run: |
+          chmod +x scripts/package_app.sh
+          bash scripts/package_app.sh
+
+      - name: Upload macOS Zip Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: MeetingCapture-macOS-arm64
+          path: publish/MeetingCapture-mac-arm64.zip
+
+  create-release:
+    name: Publish GitHub Release
+    needs: [build-ios, build-macos]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download iOS IPA
+        uses: actions/download-artifact@v4
+        with:
+          name: MeetingCapture-iOS
+
+      - name: Download macOS Zip
+        uses: actions/download-artifact@v4
+        with:
+          name: MeetingCapture-macOS-arm64
+
+      - name: Determine Tag
+        id: vars
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "tag=${{ github.event.inputs.tag_name }}" >> $GITHUB_OUTPUT
+          else
+            echo "tag=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.vars.outputs.tag }}
+          name: MeetingCapture ${{ steps.vars.outputs.tag }}
+          draft: false
+          prerelease: false
+          files:
+            MeetingCapture-iOS.ipa
+            MeetingCapture-mac-arm64.zip
+          body: |
+            ## 🚀 MeetingCapture ${{ steps.vars.outputs.tag }}
+            
+            Application autonome et sécurisée de capture et d'intelligence de réunion (ScreenCaptureKit, ReplayKit, Loopback audio & transcription Whisper).
+            
+            ---
+            
+            ### 📱 Installation sur iOS (iPhone / iPad) — Sans recompiler
+            1. Téléchargez le fichier **`MeetingCapture-iOS.ipa`** ci-dessous sur votre iPhone.
+            2. Ouvrez-le avec votre outil de Sideloading favori (gratuit et en 1 clic) :
+               - **[AltStore](https://altstore.io)** : Partager > *"Ouvrir dans AltStore"*.
+               - **SideStore** / **Sideloadly** / **TrollStore**.
+            3. L'application est installée directement sur votre écran d'accueil avec son icône native et prête à capturer vos réunions !
+            
+            ---
+            
+            ### 💻 Installation sur macOS (Apple Silicon arm64)
+            1. Téléchargez **`MeetingCapture-mac-arm64.zip`**.
+            2. Décompressez l'archive et glissez `MeetingCapture.app` dans votre dossier `/Applications`.
+            3. Lancez l'application en double-cliquant dessus.
