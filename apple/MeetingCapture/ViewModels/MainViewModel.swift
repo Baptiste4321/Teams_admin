@@ -8,6 +8,12 @@ public class MainViewModel: ObservableObject {
     @Published public var isAlwaysOnTop: Bool = false
     @Published public var isDetailsExpanded: Bool = false
     
+    // Navigation / UI State
+    @Published public var showHistory: Bool = false
+    @Published public var showSettings: Bool = false
+    @Published public var pulseRec: Bool = false
+    @Published public var selectedTab: Int = 0
+    
     // Services
     @Published public var orchestrator = MeetingOrchestrator.shared
     @Published public var captureService = ScreenCaptureService.shared

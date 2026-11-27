@@ -4,8 +4,16 @@
 <dict>
     <key>CFBundleIdentifier</key>
     <string>com.meetingcapture.app</string>
+    <key>CFBundleExecutable</key>
+    <string>MeetingCapture</string>
     <key>CFBundleName</key>
     <string>MeetingCapture</string>
+    <key>CFBundleDisplayName</key>
+    <string>MeetingCapture</string>
+    <key>CFBundleIconFile</key>
+    <string>AppIcon</string>
+    <key>CFBundleIconName</key>
+    <string>AppIcon</string>
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleShortVersionString</key>

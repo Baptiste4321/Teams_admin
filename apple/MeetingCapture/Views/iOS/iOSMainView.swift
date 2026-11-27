@@ -3,12 +3,11 @@ import SwiftUI
 /// Interface tactile principale pour iOS (iPhone & iPad)
 public struct iOSMainView: View {
     @StateObject private var vm = MainViewModel()
-    @State private var selectedTab = 0
     
     public init() {}
     
     public var body: some View {
-        TabView(selection: $selectedTab) {
+        TabView(selection: $vm.selectedTab) {
             // Onglet 1 : Enregistrement
             NavigationView {
                 VStack(spacing: 20) {
@@ -85,7 +84,9 @@ public struct iOSMainView: View {
                     Spacer()
                 }
                 .navigationTitle("Capture")
+                #if os(iOS)
                 .navigationBarTitleDisplayMode(.inline)
+                #endif
                 .background(Color(white: 0.05).ignoresSafeArea())
             }
             .tabItem {

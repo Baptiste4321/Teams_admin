@@ -96,7 +96,9 @@ struct iOSMeetingDetailView: View {
             .padding()
         }
         .navigationTitle(meeting.title)
+        #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
+        #endif
         .onAppear {
             vm.selectMeeting(meeting)
         }

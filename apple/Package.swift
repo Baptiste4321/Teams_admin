@@ -18,7 +18,13 @@ let package = Package(
     targets: [
         .executableTarget(
             name: "MeetingCapture",
-            path: "MeetingCapture"
+            path: "MeetingCapture",
+            exclude: [
+                "App/Info.plist",
+                "App/MeetingCapture.entitlements",
+                "App/AppIcon.icns",
+                "App/app.ico"
+            ]
         )
     ]
 )
