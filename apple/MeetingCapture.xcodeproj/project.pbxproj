@@ -46,14 +46,14 @@
 		B10012 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		B10013 /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
 		B10014 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
-		B10015 /* VuMeterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VuMeterView.swift; sourceTree = "<group>"; };
-		B10016 /* StatusBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBadgeView.swift; sourceTree = "<group>"; };
-		B10017 /* MacMainWindowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacMainWindowView.swift; sourceTree = "<group>"; };
-		B10018 /* MacHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacHistoryView.swift; sourceTree = "<group>"; };
-		B10019 /* MacSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacSettingsView.swift; sourceTree = "<group>"; };
-		B10020 /* iOSMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSMainView.swift; sourceTree = "<group>"; };
-		B10021 /* iOSHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSHistoryView.swift; sourceTree = "<group>"; };
-		B10022 /* iOSSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSSettingsView.swift; sourceTree = "<group>"; };
+		B10015 /* VuMeterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components/VuMeterView.swift; sourceTree = "<group>"; };
+		B10016 /* StatusBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components/StatusBadgeView.swift; sourceTree = "<group>"; };
+		B10017 /* MacMainWindowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mac/MacMainWindowView.swift; sourceTree = "<group>"; };
+		B10018 /* MacHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mac/MacHistoryView.swift; sourceTree = "<group>"; };
+		B10019 /* MacSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mac/MacSettingsView.swift; sourceTree = "<group>"; };
+		B10020 /* iOSMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS/iOSMainView.swift; sourceTree = "<group>"; };
+		B10021 /* iOSHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS/iOSHistoryView.swift; sourceTree = "<group>"; };
+		B10022 /* iOSSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS/iOSSettingsView.swift; sourceTree = "<group>"; };
 		C10001 /* MeetingCapture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeetingCapture.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 

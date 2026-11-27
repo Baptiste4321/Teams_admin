@@ -1,3 +1,4 @@
+#if os(macOS)
 import SwiftUI
 
 /// Fenêtre de Paramètres macOS
@@ -75,3 +76,5 @@ public struct MacSettingsView: View {
         .frame(width: 440, height: 380)
     }
 }
+
+#endif

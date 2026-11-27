@@ -1,3 +1,4 @@
+#if os(macOS)
 import SwiftUI
 
 /// Widget principal flottant macOS Studio
@@ -226,3 +227,5 @@ public struct MacMainWindowView: View {
         }
     }
 }
+
+#endif
