@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleIdentifier</key>
+    <string>com.meetingcapture.app</string>
+    <key>CFBundleName</key>
+    <string>MeetingCapture</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>CFBundleShortVersionString</key>
+    <string>1.0.0</string>
+    <key>CFBundleVersion</key>
+    <string>1</string>
+    <key>LSMinimumSystemVersion</key>
+    <string>13.0</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>MeetingCapture a besoin de l'accès au microphone pour enregistrer votre voix lors des réunions.</string>
+    <key>NSScreenCaptureUsageDescription</key>
+    <string>MeetingCapture a besoin de l'autorisation d'enregistrement de l'écran pour capturer la fenêtre de réunion Microsoft Teams.</string>
+    <key>NSSpeechRecognitionUsageDescription</key>
+    <string>MeetingCapture utilise la reconnaissance vocale pour transcrire les échanges de votre réunion.</string>
+</dict>
+</plist>

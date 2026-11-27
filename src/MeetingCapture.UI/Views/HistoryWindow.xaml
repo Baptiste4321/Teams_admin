@@ -1,0 +1,606 @@
+<Window x:Class="MeetingCapture.UI.Views.HistoryWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:conv="clr-namespace:MeetingCapture.UI.Converters"
+        Title="Historique &amp; Relecture Multimédia — Meeting Capture Studio"
+        Height="760" Width="1160"
+        MinHeight="620" MinWidth="960"
+        WindowStartupLocation="CenterOwner"
+        Background="#0B0C10">
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+        <conv:InverseBooleanToVisibilityConverter x:Key="InverseBoolToVis"/>
+
+        <!-- Bouton lecteur multimédia moderne -->
+        <Style x:Key="ModernPlayerBtn" TargetType="Button">
+            <Setter Property="Background" Value="#4F46E5"/>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="12,7"/>
+            <Setter Property="Margin" Value="3,0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Bd" Background="{TemplateBinding Background}" CornerRadius="8" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bd" Property="Opacity" Value="0.9"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Bd" Property="Opacity" Value="0.75"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Style Onglet Moderne / Pills Navigation -->
+        <Style x:Key="ModernTabItem" TargetType="TabItem">
+            <Setter Property="Foreground" Value="#94A3B8"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="14,8"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TabItem">
+                        <Border x:Name="TabBorder" Background="Transparent" CornerRadius="8" Margin="0,0,6,0" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter x:Name="ContentSite"
+                                              VerticalAlignment="Center"
+                                              HorizontalAlignment="Center"
+                                              ContentSource="Header"
+                                              RecognizesAccessKey="True"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="TabBorder" Property="Background" Value="#1C1F2E"/>
+                                <Setter Property="Foreground" Value="#F8FAFC"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="TabBorder" Property="Background" Value="#4F46E5"/>
+                                <Setter Property="Foreground" Value="#FFFFFF"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Style Item de réunion sélectionnable -->
+        <Style x:Key="MeetingListBoxItem" TargetType="ListBoxItem">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="0,3"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border x:Name="ItemContainer" Background="#141723" CornerRadius="8" BorderBrush="#202436" BorderThickness="1" Padding="12,10">
+                            <ContentPresenter/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ItemContainer" Property="Background" Value="#1B1F30"/>
+                                <Setter TargetName="ItemContainer" Property="BorderBrush" Value="#2E3550"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="ItemContainer" Property="Background" Value="#1E2338"/>
+                                <Setter TargetName="ItemContainer" Property="BorderBrush" Value="#6366F1"/>
+                                <Setter TargetName="ItemContainer" Property="BorderThickness" Value="1.5"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="18">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Top Header & Actions Bar -->
+        <Grid Grid.Row="0" x:Name="TopHeaderBar" Margin="0,0,0,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="240"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Title & Subtitle -->
+            <StackPanel Grid.Column="0" Orientation="Vertical" VerticalAlignment="Center">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <Border Width="10" Height="10" CornerRadius="5" Background="#6366F1" Margin="0,0,10,0">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="10" Color="#6366F1" Opacity="0.9" ShadowDepth="0"/>
+                        </Border.Effect>
+                    </Border>
+                    <TextBlock Text="Historique &amp; Relecture Studio" Foreground="#F8FAFC" FontWeight="Bold" FontSize="20"/>
+                </StackPanel>
+                <TextBlock Text="Relecture vidéo HD, audio isolé, sous-titres Whisper et chat synchronisés" Foreground="#94A3B8" FontSize="12" Margin="20,3,0,0"/>
+            </StackPanel>
+
+            <!-- Load External Folder Button -->
+            <Button Grid.Column="1" Command="{Binding LoadExternalFolderCommand}"
+                    Background="#1E2235" Foreground="#E2E8F0" FontWeight="SemiBold" FontSize="12"
+                    BorderBrush="#2E344D" BorderThickness="1" Padding="14,8" Margin="0,0,10,0" Cursor="Hand" VerticalAlignment="Center"
+                    ToolTip="Charger un dossier d'enregistrement externe depuis votre disque">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="btnBd" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="8" Padding="{TemplateBinding Padding}">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <TextBlock Text="📂" FontSize="12" Margin="0,0,6,0"/>
+                                <TextBlock Text="Dossier externe..." FontSize="12"/>
+                            </StackPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="btnBd" Property="Background" Value="#292F47"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <!-- Search box -->
+            <Grid Grid.Column="2" VerticalAlignment="Center">
+                <TextBox Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}"
+                         Padding="30,8,10,8" ToolTip="Filtrer par titre ou date..."/>
+                <TextBlock Text="🔍" Foreground="#64748B" FontSize="11" VerticalAlignment="Center" Margin="10,0,0,0" IsHitTestVisible="False"/>
+            </Grid>
+
+            <!-- Refresh Button -->
+            <Button Grid.Column="3" Command="{Binding RefreshCommand}"
+                    Background="#4F46E5" Foreground="#FFFFFF" FontWeight="SemiBold" FontSize="12"
+                    BorderThickness="0" Padding="14,8" Margin="10,0,0,0" Cursor="Hand" VerticalAlignment="Center">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="btnBd" Background="{TemplateBinding Background}" CornerRadius="8" Padding="{TemplateBinding Padding}">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <TextBlock Text="🔄" FontSize="11" Margin="0,0,6,0"/>
+                                <TextBlock Text="Actualiser" FontSize="12"/>
+                            </StackPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="btnBd" Property="Background" Value="#4338CA"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </Grid>
+
+        <!-- Main Master-Detail View -->
+        <Grid Grid.Row="1" x:Name="MasterGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="ColMeetingsList" Width="310"/>
+                <ColumnDefinition x:Name="ColDetails" Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Left: Meetings List -->
+            <Border x:Name="LeftMeetingsBorder" Grid.Column="0" Background="#11131C" CornerRadius="12" BorderBrush="#1F2333" BorderThickness="1" Margin="0,0,12,0" Padding="8">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="RÉUNIONS ENREGISTRÉES" Foreground="#64748B" FontWeight="Bold" FontSize="10" Margin="8,4,0,8"/>
+
+                    <ListBox Grid.Row="1" ItemsSource="{Binding FilteredMeetings}" SelectedItem="{Binding SelectedMeeting}"
+                             ItemContainerStyle="{StaticResource MeetingListBoxItem}"
+                             Background="Transparent" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="{Binding Title}" Foreground="#F8FAFC" FontWeight="SemiBold" FontSize="13" TextTrimming="CharacterEllipsis"/>
+                                    <TextBlock Text="{Binding Metadata.Date}" Foreground="#94A3B8" FontSize="11" Margin="0,3,0,6"/>
+
+                                    <!-- Badges de statut épurés -->
+                                    <WrapPanel Orientation="Horizontal">
+                                        <Border Background="#1E293B" CornerRadius="4" Padding="6,2" Margin="0,0,4,2">
+                                            <TextBlock Text="MÉDIA" Foreground="#38BDF8" FontSize="9" FontWeight="Bold"/>
+                                        </Border>
+                                        <Border Background="#064E3B" CornerRadius="4" Padding="6,2" Margin="0,0,4,2">
+                                            <TextBlock Text="WHISPER" Foreground="#34D399" FontSize="9" FontWeight="Bold"/>
+                                        </Border>
+                                        <Border Background="#312E81" CornerRadius="4" Padding="6,2" Margin="0,0,4,2">
+                                            <TextBlock Text="SYNCHRO" Foreground="#A5B4FC" FontSize="9" FontWeight="Bold"/>
+                                        </Border>
+                                    </WrapPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </Border>
+
+            <!-- Right: Details Tabs -->
+            <Border x:Name="RightDetailsBorder" Grid.Column="1" Background="#11131C" CornerRadius="12" BorderBrush="#1F2333" BorderThickness="1" Padding="14">
+                <Grid Visibility="{Binding HasSelectedMeeting, Converter={StaticResource BoolToVis}}">
+                    <TabControl x:Name="DetailsTabControl" Background="Transparent" BorderThickness="0">
+                        <TabControl.Resources>
+                            <Style TargetType="TabItem" BasedOn="{StaticResource ModernTabItem}"/>
+                        </TabControl.Resources>
+
+                        <!-- Tab 1: Synchronized Multimedia Player -->
+                        <TabItem Header="🎬 Relecture Synchronisée">
+                            <Grid x:Name="PlayerAndTranscriptGrid" Margin="0,12,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition x:Name="ColPlayer" Width="58*"/>
+                                    <ColumnDefinition x:Name="ColTranscript" Width="42*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Left Player Column -->
+                                <Border x:Name="PlayerBorder" Grid.Column="0" Background="#0C0E14" CornerRadius="10" Padding="12" Margin="0,0,10,0" BorderBrush="#1E2232" BorderThickness="1">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <!-- Media Header / Format Info -->
+                                        <Grid Grid.Row="0" Margin="0,0,0,10">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="{Binding SelectedMeeting.Title}" Foreground="#F8FAFC" FontWeight="Bold" FontSize="14" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+                                            <Border Grid.Column="1" Background="#1E2335" CornerRadius="6" Padding="8,3" BorderBrush="#2C324B" BorderThickness="1">
+                                                <TextBlock Text="{Binding MediaTypeBadge}" Foreground="#38BDF8" FontSize="10" FontWeight="Bold"/>
+                                            </Border>
+                                        </Grid>
+
+                                        <!-- Video / Audio Element Frame -->
+                                        <Border Grid.Row="1" Background="#000000" CornerRadius="8" ClipToBounds="True" BorderBrush="#1C2030" BorderThickness="1">
+                                            <Grid>
+                                                <MediaElement x:Name="PlayerMediaElement"
+                                                              LoadedBehavior="Manual"
+                                                              UnloadedBehavior="Stop"
+                                                              Stretch="Uniform"
+                                                              HorizontalAlignment="Center"
+                                                              VerticalAlignment="Center"
+                                                              MediaOpened="PlayerMediaElement_MediaOpened"
+                                                              MediaEnded="PlayerMediaElement_MediaEnded"
+                                                              MouseLeftButtonDown="PlayerMediaElement_MouseLeftButtonDown"
+                                                              Cursor="Hand"
+                                                              ToolTip="Double-cliquez pour basculer en plein écran"/>
+                                                
+                                                <!-- Overlay if no media file found -->
+                                                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                            Visibility="{Binding HasMedia, Converter={StaticResource InverseBoolToVis}}">
+                                                    <TextBlock Text="📁 Fichier vidéo/audio non présent" Foreground="#94A3B8" FontSize="13" FontWeight="SemiBold" HorizontalAlignment="Center"/>
+                                                    <TextBlock Text="La navigation synchronisée dans le texte et le chat reste active." Foreground="#64748B" FontSize="11" Margin="0,4,0,0" HorizontalAlignment="Center"/>
+                                                </StackPanel>
+
+                                                <!-- Floating banner in Fullscreen mode -->
+                                                <Button x:Name="BtnExitFullscreenFloating"
+                                                        Click="BtnToggleFullscreen_Click"
+                                                        Visibility="Collapsed"
+                                                        Content="✕ Quitter le plein écran (Échap)"
+                                                        Background="#D91E2235" Foreground="#F8FAFC"
+                                                        BorderBrush="#4B5563" BorderThickness="1"
+                                                        Padding="12,6" FontWeight="SemiBold" FontSize="12"
+                                                        HorizontalAlignment="Right" VerticalAlignment="Top"
+                                                        Margin="14" Cursor="Hand">
+                                                    <Button.Resources>
+                                                        <Style TargetType="Border">
+                                                            <Setter Property="CornerRadius" Value="6"/>
+                                                        </Style>
+                                                    </Button.Resources>
+                                                </Button>
+                                            </Grid>
+                                        </Border>
+
+                                        <!-- Progress Slider & Timestamps -->
+                                        <Grid Grid.Row="2" Margin="0,10,0,0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Slider x:Name="PlaybackSlider" Grid.Column="0"
+                                                    Minimum="0" Maximum="{Binding TotalDurationSeconds}"
+                                                    Value="{Binding CurrentPlaybackSeconds, Mode=TwoWay}"
+                                                    PreviewMouseDown="PlaybackSlider_PreviewMouseDown"
+                                                    PreviewMouseUp="PlaybackSlider_PreviewMouseUp"
+                                                    VerticalAlignment="Center" Margin="0,0,12,0"/>
+                                            <TextBlock Grid.Column="1" Text="{Binding PlaybackTimeDisplay}" Foreground="#94A3B8" FontSize="11" FontFamily="Consolas, Segoe UI" VerticalAlignment="Center"/>
+                                        </Grid>
+
+                                        <!-- Control Bar (Transport pro) -->
+                                        <Grid Grid.Row="3" Margin="0,10,0,0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <!-- Play / Pause / Stop -->
+                                            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                                <Button x:Name="BtnPlay" Style="{StaticResource ModernPlayerBtn}" Click="BtnPlay_Click" Content="▶ Lecture" ToolTip="Lancer la lecture"/>
+                                                <Button x:Name="BtnPause" Style="{StaticResource ModernPlayerBtn}" Click="BtnPause_Click" Background="#262A3B" Content="⏸ Pause" ToolTip="Mettre en pause"/>
+                                                <Button x:Name="BtnStop" Style="{StaticResource ModernPlayerBtn}" Click="BtnStop_Click" Background="#262A3B" Content="⏹ Stop" ToolTip="Arrêter la lecture"/>
+                                            </StackPanel>
+
+                                            <!-- Center Fullscreen Button -->
+                                            <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <Button x:Name="BtnFullscreen" Style="{StaticResource ModernPlayerBtn}" Click="BtnToggleFullscreen_Click"
+                                                        Background="#3730A3" Content="⛶ Plein écran"
+                                                        ToolTip="Agrandir en plein écran (ou double-clic sur la vidéo)"/>
+                                            </StackPanel>
+
+                                            <!-- Volume Control -->
+                                            <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                                                <TextBlock Text="🔊" Foreground="#94A3B8" FontSize="12" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                                                <Slider Width="90" Minimum="0" Maximum="1" Value="{Binding Volume}"
+                                                        ValueChanged="VolumeSlider_ValueChanged" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Grid>
+                                </Border>
+
+                                <!-- Right Synchronized Transcription & Chat Column -->
+                                <Border x:Name="TranscriptBorder" Grid.Column="1" Background="#0C0E14" CornerRadius="10" Padding="12" BorderBrush="#1E2232" BorderThickness="1">
+                                    <TabControl Background="Transparent" BorderThickness="0">
+                                        <TabControl.Resources>
+                                            <Style TargetType="TabItem" BasedOn="{StaticResource ModernTabItem}"/>
+                                        </TabControl.Resources>
+
+                                        <!-- Sub-Tab: Synchronized Transcript -->
+                                        <TabItem Header="📝 Transcription">
+                                            <Grid Margin="0,10,0,0">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="*"/>
+                                                </Grid.RowDefinitions>
+
+                                                <!-- Header with Retranscribe button -->
+                                                <Grid Grid.Row="0" Margin="0,0,0,8">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock Grid.Column="0" Text="💡 Cliquez sur une réplique pour naviguer :"
+                                                               Foreground="#94A3B8" FontSize="11" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                                                    <Button Grid.Column="1" Command="{Binding RetranscribeMeetingCommand}"
+                                                            Content="🎙️ Transcrire avec Whisper"
+                                                            Background="#4F46E5" Foreground="#FFFFFF"
+                                                            FontWeight="SemiBold" FontSize="11" BorderThickness="0" Padding="10,6" Cursor="Hand"
+                                                            ToolTip="Lancer ou relancer Whisper IA sur le fichier audio capturé">
+                                                        <Button.Template>
+                                                            <ControlTemplate TargetType="Button">
+                                                                <Border x:Name="reBd" Background="{TemplateBinding Background}" CornerRadius="6" Padding="{TemplateBinding Padding}">
+                                                                    <ContentPresenter/>
+                                                                </Border>
+                                                                <ControlTemplate.Triggers>
+                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                        <Setter TargetName="reBd" Property="Background" Value="#4338CA"/>
+                                                                    </Trigger>
+                                                                </ControlTemplate.Triggers>
+                                                            </ControlTemplate>
+                                                        </Button.Template>
+                                                    </Button>
+                                                </Grid>
+
+                                                <!-- Transcription Progress Bar -->
+                                                <ProgressBar Grid.Row="1" IsIndeterminate="True" Height="3" Margin="0,0,0,8"
+                                                             Foreground="#6366F1"
+                                                             Visibility="{Binding IsTranscribing, Converter={StaticResource BoolToVis}}"/>
+
+                                                <!-- Synchronized Transcripts List -->
+                                                <ListBox x:Name="SyncTranscriptList" Grid.Row="2"
+                                                         ItemsSource="{Binding SelectedMeeting.TranscriptSegments}"
+                                                         SelectedItem="{Binding ActiveTranscriptSegment, Mode=TwoWay}"
+                                                         SelectionChanged="SyncTranscriptList_SelectionChanged"
+                                                         Background="Transparent" BorderThickness="0"
+                                                         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                                    <ListBox.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <Border Background="#151722" CornerRadius="8" Padding="10,8" Margin="0,3" BorderBrush="#202436" BorderThickness="1">
+                                                                <Grid>
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="58"/>
+                                                                        <ColumnDefinition Width="*"/>
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <Border Grid.Column="0" Background="#1E2338" CornerRadius="5" Padding="4,2" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                                                        <TextBlock Text="{Binding Start, StringFormat='{}{0:F1}s'}" Foreground="#38BDF8" FontSize="10" FontWeight="Bold"/>
+                                                                    </Border>
+                                                                    <StackPanel Grid.Column="1" Margin="6,0,0,0">
+                                                                        <TextBlock Text="{Binding Speaker}" Foreground="#818CF8" FontWeight="SemiBold" FontSize="11"/>
+                                                                        <TextBlock Text="{Binding Text}" Foreground="#F1F5F9" FontSize="12" TextWrapping="Wrap" Margin="0,2,0,0"/>
+                                                                    </StackPanel>
+                                                                </Grid>
+                                                            </Border>
+                                                        </DataTemplate>
+                                                    </ListBox.ItemTemplate>
+                                                </ListBox>
+                                            </Grid>
+                                        </TabItem>
+
+                                        <!-- Sub-Tab: Chat Messages -->
+                                        <TabItem Header="💬 Messages du Chat">
+                                            <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,10,0,0">
+                                                <ItemsControl ItemsSource="{Binding SelectedMeeting.ChatMessages}">
+                                                    <ItemsControl.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <Border Background="#151722" CornerRadius="8" Padding="10,8" Margin="0,3" BorderBrush="#202436" BorderThickness="1">
+                                                                <Grid>
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="65"/>
+                                                                        <ColumnDefinition Width="*"/>
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <TextBlock Grid.Column="0" Text="{Binding TimestampUtc, StringFormat='{}{0:HH:mm}'}" Foreground="#64748B" FontSize="11" VerticalAlignment="Top"/>
+                                                                    <StackPanel Grid.Column="1">
+                                                                        <TextBlock Text="{Binding Author}" Foreground="#C084FC" FontWeight="SemiBold" FontSize="11"/>
+                                                                        <TextBlock Text="{Binding Text}" Foreground="#F1F5F9" FontSize="12" TextWrapping="Wrap" Margin="0,2,0,0"/>
+                                                                    </StackPanel>
+                                                                </Grid>
+                                                            </Border>
+                                                        </DataTemplate>
+                                                    </ItemsControl.ItemTemplate>
+                                                </ItemsControl>
+                                            </ScrollViewer>
+                                        </TabItem>
+                                    </TabControl>
+                                </Border>
+                            </Grid>
+                        </TabItem>
+
+                        <!-- Tab 2: AI Summary & Action Items -->
+                        <TabItem Header="✨ Synthèse &amp; Décisions IA">
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,12,0,0">
+                                <StackPanel Orientation="Vertical">
+                                    <!-- Résumé exécutif -->
+                                    <Border Background="#151824" CornerRadius="10" Padding="14" Margin="0,0,0,14" BorderBrush="#23273B" BorderThickness="1">
+                                        <StackPanel Orientation="Vertical">
+                                            <TextBlock Text="Résumé Exécutif" Foreground="#60A5FA" FontWeight="Bold" FontSize="14" Margin="0,0,0,6"/>
+                                            <TextBlock Text="{Binding SelectedMeetingSummary}" Foreground="#E2E8F0" FontSize="12" TextWrapping="Wrap" LineHeight="20"/>
+                                        </StackPanel>
+                                    </Border>
+
+                                    <!-- Décisions validées -->
+                                    <Border Background="#151824" CornerRadius="10" Padding="14" Margin="0,0,0,14" BorderBrush="#23273B" BorderThickness="1">
+                                        <StackPanel Orientation="Vertical">
+                                            <TextBlock Text="Décisions Validées" Foreground="#34D399" FontWeight="Bold" FontSize="14" Margin="0,0,0,6"/>
+                                            <ItemsControl ItemsSource="{Binding SelectedMeetingDecisions}">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel Orientation="Horizontal" Margin="0,3">
+                                                            <TextBlock Text="✔ " Foreground="#10B981" FontWeight="Bold" FontSize="12"/>
+                                                            <TextBlock Text="{Binding}" Foreground="#E2E8F0" FontSize="12" TextWrapping="Wrap"/>
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </StackPanel>
+                                    </Border>
+
+                                    <!-- Plan d'Action & Tâches -->
+                                    <Border Background="#151824" CornerRadius="10" Padding="14" BorderBrush="#23273B" BorderThickness="1">
+                                        <StackPanel Orientation="Vertical">
+                                            <TextBlock Text="Plan d'Action &amp; Tâches" Foreground="#FBBF24" FontWeight="Bold" FontSize="14" Margin="0,0,0,8"/>
+                                            <ItemsControl ItemsSource="{Binding SelectedMeetingActions}">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Grid Margin="0,5">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="80"/>
+                                                                <ColumnDefinition Width="*"/>
+                                                                <ColumnDefinition Width="140"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <Border Grid.Column="0" Background="#282015" CornerRadius="4" Padding="6,2" HorizontalAlignment="Left" BorderBrush="#78350F" BorderThickness="1">
+                                                                <TextBlock Text="{Binding Priority}" Foreground="#FBBF24" FontSize="10" FontWeight="Bold"/>
+                                                            </Border>
+                                                            <TextBlock Grid.Column="1" Text="{Binding Task}" Foreground="#F8FAFC" FontSize="12" FontWeight="Medium" TextWrapping="Wrap" VerticalAlignment="Center"/>
+                                                            <TextBlock Grid.Column="2" Text="{Binding Assignee, StringFormat='Resp: {0}'}" Foreground="#94A3B8" FontSize="11" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </StackPanel>
+                                    </Border>
+                                </StackPanel>
+                            </ScrollViewer>
+                        </TabItem>
+
+                        <!-- Tab 3: Technical Metadata -->
+                        <TabItem Header="⚙ Métadonnées &amp; Fichiers">
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,12,0,0">
+                                <Border Background="#151824" CornerRadius="10" Padding="16" BorderBrush="#23273B" BorderThickness="1">
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock Text="Détails Techniques de la Session" Foreground="#F8FAFC" FontWeight="Bold" FontSize="14" Margin="0,0,0,10"/>
+                                        <TextBlock Text="{Binding SelectedMeeting.Id, StringFormat='ID de Session : {0}'}" Foreground="#94A3B8" FontSize="11" Margin="0,3"/>
+                                        <TextBlock Text="{Binding SelectedMeeting.RootDirectory, StringFormat='Emplacement Dossier : {0}'}" Foreground="#94A3B8" FontSize="11" Margin="0,3"/>
+                                        <TextBlock Text="{Binding SelectedMeeting.Metadata.Resolution, StringFormat='Résolution Vidéo : {0}'}" Foreground="#94A3B8" FontSize="11" Margin="0,3"/>
+                                        <TextBlock Text="{Binding SelectedMeeting.Metadata.Fps, StringFormat='Fréquence : {0} FPS'}" Foreground="#94A3B8" FontSize="11" Margin="0,3"/>
+                                        <TextBlock Text="{Binding SelectedMeeting.Metadata.VideoCodec, StringFormat='Codec Vidéo : {0}'}" Foreground="#94A3B8" FontSize="11" Margin="0,3"/>
+                                        <TextBlock Text="{Binding SelectedMeeting.Metadata.AudioCodec, StringFormat='Codec Audio : {0}'}" Foreground="#94A3B8" FontSize="11" Margin="0,3"/>
+                                    </StackPanel>
+                                </Border>
+                            </ScrollViewer>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!-- Bottom Action Bar -->
+        <Border Grid.Row="2" Margin="0,16,0,0" Padding="0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Command="{Binding OpenFolderCommand}"
+                        Background="#1E2235" Foreground="#E2E8F0" BorderBrush="#2E344D" BorderThickness="1"
+                        FontWeight="SemiBold" FontSize="12" Padding="14,8" Margin="0,0,10,0" Cursor="Hand">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="bd" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="8" Padding="{TemplateBinding Padding}">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="📂" FontSize="12" Margin="0,0,6,0"/>
+                                    <TextBlock Text="Ouvrir le dossier"/>
+                                </StackPanel>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="bd" Property="Background" Value="#292F47"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <Button Command="{Binding ExportZipCommand}"
+                        Background="#059669" Foreground="#FFFFFF" BorderThickness="0"
+                        FontWeight="SemiBold" FontSize="12" Padding="14,8" Margin="0,0,10,0" Cursor="Hand">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="bd" Background="{TemplateBinding Background}" CornerRadius="8" Padding="{TemplateBinding Padding}">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="📦" FontSize="12" Margin="0,0,6,0"/>
+                                    <TextBlock Text="Exporter en ZIP"/>
+                                </StackPanel>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="bd" Property="Background" Value="#047857"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <Button Command="{Binding DeleteMeetingCommand}"
+                        Background="#DC2626" Foreground="#FFFFFF" BorderThickness="0"
+                        FontWeight="SemiBold" FontSize="12" Padding="14,8" Cursor="Hand">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="bd" Background="{TemplateBinding Background}" CornerRadius="8" Padding="{TemplateBinding Padding}">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="🗑" FontSize="12" Margin="0,0,6,0"/>
+                                    <TextBlock Text="Supprimer"/>
+                                </StackPanel>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="bd" Property="Background" Value="#B91C1C"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

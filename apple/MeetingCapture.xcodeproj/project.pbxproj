@@ -1,0 +1,323 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A10001 /* MeetingCaptureApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10001 /* MeetingCaptureApp.swift */; };
+		A10002 /* MeetingSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10002 /* MeetingSession.swift */; };
+		A10003 /* MeetingMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10003 /* MeetingMetadata.swift */; };
+		A10004 /* TranscriptSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10004 /* TranscriptSegment.swift */; };
+		A10005 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10005 /* ChatMessage.swift */; };
+		A10006 /* WindowInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10006 /* WindowInfo.swift */; };
+		A10007 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10007 /* StorageService.swift */; };
+		A10008 /* ScreenCaptureService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10008 /* ScreenCaptureService.swift */; };
+		A10009 /* AudioCaptureService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10009 /* AudioCaptureService.swift */; };
+		A10010 /* TranscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10010 /* TranscriptionService.swift */; };
+		A10011 /* MeetingOrchestrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10011 /* MeetingOrchestrator.swift */; };
+		A10012 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10012 /* MainViewModel.swift */; };
+		A10013 /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10013 /* HistoryViewModel.swift */; };
+		A10014 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10014 /* SettingsViewModel.swift */; };
+		A10015 /* VuMeterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10015 /* VuMeterView.swift */; };
+		A10016 /* StatusBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10016 /* StatusBadgeView.swift */; };
+		A10017 /* MacMainWindowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10017 /* MacMainWindowView.swift */; };
+		A10018 /* MacHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10018 /* MacHistoryView.swift */; };
+		A10019 /* MacSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10019 /* MacSettingsView.swift */; };
+		A10020 /* iOSMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10020 /* iOSMainView.swift */; };
+		A10021 /* iOSHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10021 /* iOSHistoryView.swift */; };
+		A10022 /* iOSSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10022 /* iOSSettingsView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		B10001 /* MeetingCaptureApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingCaptureApp.swift; sourceTree = "<group>"; };
+		B10002 /* MeetingSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingSession.swift; sourceTree = "<group>"; };
+		B10003 /* MeetingMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingMetadata.swift; sourceTree = "<group>"; };
+		B10004 /* TranscriptSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptSegment.swift; sourceTree = "<group>"; };
+		B10005 /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
+		B10006 /* WindowInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowInfo.swift; sourceTree = "<group>"; };
+		B10007 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
+		B10008 /* ScreenCaptureService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenCaptureService.swift; sourceTree = "<group>"; };
+		B10009 /* AudioCaptureService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioCaptureService.swift; sourceTree = "<group>"; };
+		B10010 /* TranscriptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionService.swift; sourceTree = "<group>"; };
+		B10011 /* MeetingOrchestrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingOrchestrator.swift; sourceTree = "<group>"; };
+		B10012 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		B10013 /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
+		B10014 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		B10015 /* VuMeterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VuMeterView.swift; sourceTree = "<group>"; };
+		B10016 /* StatusBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBadgeView.swift; sourceTree = "<group>"; };
+		B10017 /* MacMainWindowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacMainWindowView.swift; sourceTree = "<group>"; };
+		B10018 /* MacHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacHistoryView.swift; sourceTree = "<group>"; };
+		B10019 /* MacSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacSettingsView.swift; sourceTree = "<group>"; };
+		B10020 /* iOSMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSMainView.swift; sourceTree = "<group>"; };
+		B10021 /* iOSHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSHistoryView.swift; sourceTree = "<group>"; };
+		B10022 /* iOSSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSSettingsView.swift; sourceTree = "<group>"; };
+		C10001 /* MeetingCapture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeetingCapture.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D10001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E10001 = {
+			isa = PBXGroup;
+			children = (
+				E10002 /* MeetingCapture */,
+				C10001 /* MeetingCapture.app */,
+			);
+			sourceTree = "<group>";
+		};
+		E10002 /* MeetingCapture */ = {
+			isa = PBXGroup;
+			children = (
+				E10003 /* App */,
+				E10004 /* Models */,
+				E10005 /* Services */,
+				E10006 /* ViewModels */,
+				E10007 /* Views */,
+			);
+			path = MeetingCapture;
+			sourceTree = "<group>";
+		};
+		E10003 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				B10001 /* MeetingCaptureApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		E10004 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B10002 /* MeetingSession.swift */,
+				B10003 /* MeetingMetadata.swift */,
+				B10004 /* TranscriptSegment.swift */,
+				B10005 /* ChatMessage.swift */,
+				B10006 /* WindowInfo.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E10005 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				B10007 /* StorageService.swift */,
+				B10008 /* ScreenCaptureService.swift */,
+				B10009 /* AudioCaptureService.swift */,
+				B10010 /* TranscriptionService.swift */,
+				B10011 /* MeetingOrchestrator.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		E10006 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				B10012 /* MainViewModel.swift */,
+				B10013 /* HistoryViewModel.swift */,
+				B10014 /* SettingsViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		E10007 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B10015 /* VuMeterView.swift */,
+				B10016 /* StatusBadgeView.swift */,
+				B10017 /* MacMainWindowView.swift */,
+				B10018 /* MacHistoryView.swift */,
+				B10019 /* MacSettingsView.swift */,
+				B10020 /* iOSMainView.swift */,
+				B10021 /* iOSHistoryView.swift */,
+				B10022 /* iOSSettingsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F10001 /* MeetingCapture */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = G10001 /* Build configuration list for PBXNativeTarget "MeetingCapture" */;
+			buildPhases = (
+				H10001 /* Sources */,
+				D10001 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MeetingCapture;
+			productName = MeetingCapture;
+			productReference = C10001 /* MeetingCapture.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		I10001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+			};
+			buildConfigurationList = J10001 /* Build configuration list for PBXProject "MeetingCapture" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = fr;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				fr,
+				Base,
+			);
+			mainGroup = E10001;
+			productRefGroup = E10001;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F10001 /* MeetingCapture */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		H10001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10001 /* MeetingCaptureApp.swift in Sources */,
+				A10002 /* MeetingSession.swift in Sources */,
+				A10003 /* MeetingMetadata.swift in Sources */,
+				A10004 /* TranscriptSegment.swift in Sources */,
+				A10005 /* ChatMessage.swift in Sources */,
+				A10006 /* WindowInfo.swift in Sources */,
+				A10007 /* StorageService.swift in Sources */,
+				A10008 /* ScreenCaptureService.swift in Sources */,
+				A10009 /* AudioCaptureService.swift in Sources */,
+				A10010 /* TranscriptionService.swift in Sources */,
+				A10011 /* MeetingOrchestrator.swift in Sources */,
+				A10012 /* MainViewModel.swift in Sources */,
+				A10013 /* HistoryViewModel.swift in Sources */,
+				A10014 /* SettingsViewModel.swift in Sources */,
+				A10015 /* VuMeterView.swift in Sources */,
+				A10016 /* StatusBadgeView.swift in Sources */,
+				A10017 /* MacMainWindowView.swift in Sources */,
+				A10018 /* MacHistoryView.swift in Sources */,
+				A10019 /* MacSettingsView.swift in Sources */,
+				A10020 /* iOSMainView.swift in Sources */,
+				A10021 /* iOSHistoryView.swift in Sources */,
+				A10022 /* iOSSettingsView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		K10001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CODE_SIGN_STYLE = Automatic;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.meetingcapture.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		K10002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CODE_SIGN_STYLE = Automatic;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.meetingcapture.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		L10001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CURRENT_PROJECT_VERSION = 1;
+				INFOPLIST_FILE = MeetingCapture/App/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.meetingcapture.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		L10002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CURRENT_PROJECT_VERSION = 1;
+				INFOPLIST_FILE = MeetingCapture/App/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.meetingcapture.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		J10001 /* Build configuration list for PBXProject "MeetingCapture" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				K10001 /* Debug */,
+				K10002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		G10001 /* Build configuration list for PBXNativeTarget "MeetingCapture" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				L10001 /* Debug */,
+				L10002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = I10001 /* Project object */;
+}

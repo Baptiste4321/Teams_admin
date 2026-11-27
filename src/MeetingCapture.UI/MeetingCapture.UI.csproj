@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows10.0.22621.0</TargetFramework>
+    <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="11.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="11.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MeetingCapture.Core\MeetingCapture.Core.csproj" />
+    <ProjectReference Include="..\MeetingCapture.Storage\MeetingCapture.Storage.csproj" />
+    <ProjectReference Include="..\MeetingCapture.Synchronization\MeetingCapture.Synchronization.csproj" />
+    <ProjectReference Include="..\MeetingCapture.Video\MeetingCapture.Video.csproj" />
+    <ProjectReference Include="..\MeetingCapture.Audio\MeetingCapture.Audio.csproj" />
+    <ProjectReference Include="..\MeetingCapture.Transcription\MeetingCapture.Transcription.csproj" />
+    <ProjectReference Include="..\MeetingCapture.Chat\MeetingCapture.Chat.csproj" />
+    <ProjectReference Include="..\MeetingCapture.Integrations\MeetingCapture.Integrations.csproj" />
+    <ProjectReference Include="..\MeetingCapture.AI\MeetingCapture.AI.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\scripts\**" Link="scripts\%(RecursiveDir)%(FileName)%(Extension)">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

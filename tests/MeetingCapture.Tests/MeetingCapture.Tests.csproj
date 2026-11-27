@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows10.0.22621.0</TargetFramework>
+    <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector" Version="6.0.4" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.0" />
+    <PackageReference Include="xunit" Version="2.9.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\MeetingCapture.Core\MeetingCapture.Core.csproj" />
+    <ProjectReference Include="..\..\src\MeetingCapture.Storage\MeetingCapture.Storage.csproj" />
+    <ProjectReference Include="..\..\src\MeetingCapture.Synchronization\MeetingCapture.Synchronization.csproj" />
+    <ProjectReference Include="..\..\src\MeetingCapture.Video\MeetingCapture.Video.csproj" />
+    <ProjectReference Include="..\..\src\MeetingCapture.Audio\MeetingCapture.Audio.csproj" />
+    <ProjectReference Include="..\..\src\MeetingCapture.Transcription\MeetingCapture.Transcription.csproj" />
+    <ProjectReference Include="..\..\src\MeetingCapture.Chat\MeetingCapture.Chat.csproj" />
+    <ProjectReference Include="..\..\src\MeetingCapture.Integrations\MeetingCapture.Integrations.csproj" />
+    <ProjectReference Include="..\..\src\MeetingCapture.AI\MeetingCapture.AI.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,17 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/MeetingCapture.AI/MeetingCapture.AI.csproj" />
+    <Project Path="src/MeetingCapture.Audio/MeetingCapture.Audio.csproj" />
+    <Project Path="src/MeetingCapture.Chat/MeetingCapture.Chat.csproj" />
+    <Project Path="src/MeetingCapture.Core/MeetingCapture.Core.csproj" />
+    <Project Path="src/MeetingCapture.Integrations/MeetingCapture.Integrations.csproj" />
+    <Project Path="src/MeetingCapture.Storage/MeetingCapture.Storage.csproj" />
+    <Project Path="src/MeetingCapture.Synchronization/MeetingCapture.Synchronization.csproj" />
+    <Project Path="src/MeetingCapture.Transcription/MeetingCapture.Transcription.csproj" />
+    <Project Path="src/MeetingCapture.UI/MeetingCapture.UI.csproj" />
+    <Project Path="src/MeetingCapture.Video/MeetingCapture.Video.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/MeetingCapture.Tests/MeetingCapture.Tests.csproj" />
+  </Folder>
+</Solution>

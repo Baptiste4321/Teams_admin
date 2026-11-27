@@ -1,0 +1,82 @@
+# ==========================================
+# MeetingCapture - Comprehensive .gitignore
+# .NET / Windows / macOS / iOS / Xcode / Python
+# ==========================================
+
+# --- .NET Build & Publish Outputs ---
+bin/
+obj/
+publish/
+[Bb]in/
+[Oo]bj/
+[Pp]ublish/
+MeetingCapture-win-x64/
+*.user
+*.userosscache
+*.suo
+*.userprefs
+*.sln.docstates
+
+# Visual Studio & VS Code
+.vs/
+.vscode/
+*.ide/
+.idea/
+*.swp
+*~
+
+# Test & Diagnostics
+TestResults/
+[Tt]est[Rr]esults/
+*.log
+*.trx
+*.coverage
+*.coveragexml
+
+# --- Apple / Xcode / macOS / iOS ---
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+
+# Xcode
+xcuserdata/
+*.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
+*.xcuserstate
+DerivedData/
+build/
+*.build/
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Swift Package Manager
+.build/
+.swiftpm/
+
+# Fastlane & CocoaPods
+Pods/
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+
+# --- Python & Whisper Cache ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.env
+.venv
+env/
+venv/
+ENV/
+
+# --- Audio / Video generated media files (temporary recordings) ---
+# Uncomment if you want to exclude local recordings from Git:
+# *.wav
+# *.mp4
+# *.avi
+# *.m4a
